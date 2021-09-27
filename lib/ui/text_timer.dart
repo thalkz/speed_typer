@@ -27,17 +27,11 @@ class TimerText extends StatelessWidget {
     return StreamBuilder<int?>(
       stream: timerStream,
       builder: (context, snap) {
-        final ms = snap.data;
-        if (ms == null) {
-          return Text('Ready ?', style: Theme.of(context).textTheme.headline3);
-        } else if (ms == 0) {
-          return Text('GAME OVER', style: Theme.of(context).textTheme.headline3);
-        } else {
-          return Text(
-            (ms / 1000.0).toStringAsFixed(1),
-            style: Theme.of(context).textTheme.headline3?.copyWith(color: color),
-          );
-        }
+        final ms = snap.data ?? 0;
+        return Text(
+          (ms / 1000.0).toStringAsFixed(1),
+          style: Theme.of(context).textTheme.headline3?.copyWith(color: color),
+        );
       },
     );
   }

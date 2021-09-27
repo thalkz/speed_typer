@@ -13,7 +13,7 @@ enum InputState {
 
 class GameNotifier extends ChangeNotifier {
   late DateTime _end;
-  late StreamController<int?> _timerStream;
+  late StreamController<int> _timerStream;
   late StreamSubscription _subscription;
   final random = Random();
   List<String> _words = [];
@@ -30,13 +30,13 @@ class GameNotifier extends ChangeNotifier {
   Stream<int?> get timerStream => _timerStream.stream;
 
   GameNotifier() {
-    _timerStream = StreamController<int?>();
+    _timerStream = StreamController.broadcast();
     _subscription = Stream.periodic(const Duration(milliseconds: 100)).listen(_onPeriodicEvent);
   }
 
   void _onPeriodicEvent(event) {
     if (!isPlaying) {
-      _timerStream.sink.add(null);
+      _timerStream.sink.add(0);
     } else {
       final ms = max(_end.millisecondsSinceEpoch - DateTime.now().millisecondsSinceEpoch, 0);
       if (ms <= 0) {
@@ -53,13 +53,12 @@ class GameNotifier extends ChangeNotifier {
       if (input.length == prompt.length) {
         score++;
         _end = _end.add(const Duration(milliseconds: increaseMsPerWord));
-        inputState = InputState.typing;
+        inputState = InputState.valid;
         notifyListeners();
         Future.delayed(const Duration(milliseconds: 200)).then((_) {
           _pickRandomWord();
         });
       } else if (!prompt.startsWith(input)) {
-        _end = _end.subtract(const Duration(milliseconds: increaseMsPerWord));
         inputState = InputState.error;
         notifyListeners();
         Future.delayed(const Duration(milliseconds: 500)).then((_) {

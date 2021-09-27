@@ -23,10 +23,16 @@ class GamePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              TimerText(
-                timerStream: notifier.timerStream,
-                inputState: notifier.inputState,
-              ),
+              if (notifier.isPlaying)
+                TimerText(
+                  timerStream: notifier.timerStream,
+                  inputState: notifier.inputState,
+                )
+              else
+                Text(
+                  'Ready ?',
+                  style: Theme.of(context).textTheme.headline3,
+                ),
               if (!notifier.isPlaying && notifier.score != 0)
                 Text(
                   'Score: ${notifier.score}',
