@@ -74,7 +74,7 @@ class GameNotifier extends ChangeNotifier {
   void start() async {
     if (!isPlaying) {
       _end = DateTime.now().add(const Duration(milliseconds: initialMs));
-      _words = await loadWords('fr');
+      _words = await loadWords('fr2');
       _maxWordLength = _words.fold<int>(0, (previousValue, word) => max(previousValue, word.length));
       score = 0;
       isPlaying = true;
