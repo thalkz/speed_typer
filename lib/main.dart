@@ -14,10 +14,9 @@ class App extends StatelessWidget {
       notifier: GameNotifier(),
       child: MaterialApp(
         title: 'Speed Typer',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        theme: ThemeData.dark(),
         home: const GamePage(),
+        debugShowCheckedModeBanner: false,
       ),
     );
   }

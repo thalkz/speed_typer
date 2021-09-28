@@ -6,10 +6,12 @@ class TimerText extends StatelessWidget {
     Key? key,
     required this.timerStream,
     required this.inputState,
+    this.style,
   }) : super(key: key);
 
-  final Stream<int?> timerStream;
+  final Stream<int> timerStream;
   final InputState inputState;
+  final TextStyle? style;
 
   Color get color {
     switch (inputState) {
@@ -30,7 +32,7 @@ class TimerText extends StatelessWidget {
         final ms = snap.data ?? 0;
         return Text(
           (ms / 1000.0).toStringAsFixed(1),
-          style: Theme.of(context).textTheme.headline3?.copyWith(color: color),
+          style: style,
         );
       },
     );
