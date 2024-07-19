@@ -48,13 +48,13 @@ class MenuScreen extends StatelessWidget {
           if (notifier.score != 0) ...[
             Text(
               'Score: ${notifier.score}',
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(height: 16),
           ],
           Text(
             '— Press Enter to start —',
-            style: Theme.of(context).textTheme.bodyText1,
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
         ],
       ),
@@ -76,12 +76,12 @@ class PlayScreen extends StatelessWidget {
           children: [
             Text(
               'Score: ${notifier.score}',
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             TimerText(
               timerStream: notifier.timerStream,
               inputState: notifier.inputState,
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
           ],
         ),
